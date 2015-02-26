@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html ng-app="plunker">
+  <head>
+    <meta charset="utf-8" />
+    <title>AngularJS Plunker</title>
+    <link data-require="bootstrap@*" data-semver="3.3.1" rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />
+    <script data-require="bootstrap@*" data-semver="3.3.1" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script>document.write('<base href="' + document.location + '" />');</script>
+    <link rel="stylesheet" href="style.css" />
+    <script data-require="angular.js@1.3.x" src="https://code.angularjs.org/1.3.11/angular.js" data-semver="1.3.11"></script>
+    <script src="app.js"></script>
+  </head>
+  <body ng-controller="MainCtrl">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="well contactDetails" ng-show="contactName">
+            <h1>{{contactName}} <small>{{address}}</small></h1>
+            <hr/>
+            <div class="row">
+              <div class="col-md-6" ng-show="contactNumbers.home || contactNumbers.mobile || contactNumbers.work">
+                <h2>Contact Numbers</h2>
+                <table class="table table-striped">
+                  <tr ng-show="contactNumbers.home">
+                    <td><strong>home</strong></td>
+                    <td>{{contactNumbers.home}}</td>
+                  </tr>
+                  <tr ng-show="contactNumbers.mobile">
+                    <td><strong>mobile</strong></td>
+                    <td>{{contactNumbers.mobile}}</td>
+                  </tr>
+                  <tr ng-show="contactNumbers.work">
+                    <td><strong>work</strong></td>
+                    <td>{{contactNumbers.work}}</td>
+                  </tr>
+                </table>
+              </div>
+              <div class="col-md-6" ng-show="emailAddresses.personal || emailAddresses.work">
+                <h2>Email Addresses</h2>
+                <table class="table table-striped">
+                  <tr ng-show="emailAddresses.personal">
+                    <td><strong>personal</strong></td>
+                    <td>{{emailAddresses.personal}}</td>
+                  </tr>
+                  <tr ng-show="emailAddresses.work">
+                    <td><strong>work</strong></td>
+                    <td>{{emailAddresses.work}}</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div ng-repeat="contact in contacts" class="contactDetails well">
+            <div ng-hide="contact.length == 0">
+              <h1>{{contact.name}} <small>{{contact.address}}</small></h1>
+              <hr/>
+              <div class="row">
+                <div class="col-md-6" ng-show="contact.contactNumbers.home || contact.contactNumbers.mobile || contact.contactNumbers.work">
+                  <h2>Contact Numbers</h2>
+                  <table class="table table-striped">
+                    <tr ng-repeat="(key,value) in contact.contactNumbers">
+                      <td ng-show="value"><strong>{{key}}</strong></td>
+                      <td ng-show="value">{{value}}</td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="col-md-6" ng-show="contact.emailAddresses.personal || contact.emailAddresses.work">
+                  <h2>Email Addresses</h2>
+                  <table class="table table-striped">
+                    <tr ng-repeat="(key,value) in contact.emailAddresses">
+                      <td ng-show="value"><strong>{{key}}</strong></td>
+                      <td ng-show="value">{{value}}</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              <p><a class="btn btn-danger remove-btn" ng-click="remove($index)">Remove</a></p>
+            </div>
+          </div>
+          <p>{{contacts.length}} Contacts in the Address book</p>
+          <!-- <pre>{{contacts | json}}</pre> -->
+        </div>
+        <div class="col-md-4">
+          <div class="addDetails">
+            <h1>Add your details</h1>
+            <form>
+              <div class="form-group">
+                <label class="sr-only">Name</label>
+                <input type="text" class="form-control" placeholder="Your name" ng-model="contactName" required>
+              </div>
+              <div class="form-group">
+                <label class="sr-only">Address</label>
+                <textarea class="form-control" placeholder="Your current address" ng-model="address"></textarea>
+              </div>
+              <h2>Contact Numbers</h2>
+              <div class="form-group">
+                <label class="sr-only">Home number</label>
+                <input type="text" class="form-control" placeholder="Home number" ng-model="contactNumbers.home">
+              </div>
+              <div class="form-group">
+                <label class="sr-only">Mobile number</label>
+                <input type="text" class="form-control" placeholder="Mobile number" ng-model="contactNumbers.mobile" required>
+              </div>
+              <div class="form-group">
+                <label class="sr-only">Work number</label>
+                <input type="text" class="form-control" placeholder="Work number" ng-model="contactNumbers.work">
+              </div>
+              <h2>Email Addresses</h2>
+              <div class="form-group">
+                <label class="sr-only">Personal</label>
+                <input type="text" class="form-control" placeholder="Personal email address" ng-model="emailAddresses.personal" required>
+              </div>
+              <div class="form-group">
+                <label class="sr-only">Work</label>
+                <input type="text" class="form-control" placeholder="Work email address" ng-model="emailAddresses.work">
+              </div>
+              <p class="text-center"><button class="btn btn-success" ng-click="addContact()">Add</button></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

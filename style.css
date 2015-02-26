@@ -1,0 +1,30 @@
+/* Put your css in here */
+
+body {
+	padding-top: 25px;
+}
+body h1, body h2 {
+	margin-top: 0;
+	font-weight: 300;
+	text-transform: uppercase;
+}
+body h1 {
+	font-size: 1.8em;
+}
+body h2 {
+	font-size: 1.4em;
+}
+.contactDetails {
+	padding-top: 25px;
+	border-bottom: 3px solid #ececec;
+}
+.contactDetails .remove-btn {
+	display: none;
+}
+.contactDetails:hover .remove-btn {
+	display: inline-block;
+}
+.addDetails {
+	padding: 15px;
+	background-color: #ececec;
+}
